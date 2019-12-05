@@ -1,0 +1,28 @@
+DROP DATABASE IF EXISTS StoreTest;
+CREATE DATABASE StoreTest;
+USE StoreTest;
+
+DROP TABLE IF EXISTS products;
+CREATE TABLE products(
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    code VARCHAR(50) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    price FLOAT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS purchases;
+CREATE TABLE purchases(
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    subTotal FLOAT NOT NULL,
+    discount FLOAT NOT NULL,
+    total FLOAT NOT NULL    
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS productsPurchases;
+CREATE TABLE productsPurchases(
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    idProduct INT NOT NULL,
+    idPurchase INT NOT NULL,
+    FOREIGN KEY (idProduct) REFERENCES products(id),
+    FOREIGN KEY (idPurchase) REFERENCES purchases(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
